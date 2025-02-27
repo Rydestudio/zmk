@@ -1,0 +1,25 @@
+# Copyright (c) 2022 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+if SHIELD_EMBLEM_LEFT
+
+    config ZMK_KEYBOARD_NAME
+        default "Emblem"
+
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default y
+
+endif
+
+if SHIELD_EMBLEM
+
+    config ZMK_BLE
+        default y
+
+    config ZMK_SPLIT
+        default y
+
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default n
+
+endif

@@ -1,0 +1,15 @@
+file_format: "1"
+id: emblem
+name: Emblem
+type: shield
+url: https://github.com/Rydestudio/Emblem
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
+  - display
+  - underglow
+  - studio
+siblings:
+  - emblem_left
+  - emblem_right
+  - emblem_dongle

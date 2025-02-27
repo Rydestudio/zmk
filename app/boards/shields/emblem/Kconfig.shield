@@ -1,0 +1,17 @@
+# Copyright (c) 2022 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+config SHIELD_EMBLEM
+    bool
+
+config SHIELD_EMBLEM_LEFT
+    def_bool $(shields_list_contains,emblem_left)
+    select SHIELD_EMBLEM
+
+config SHIELD_EMBLEM_RIGHT
+    def_bool $(shields_list_contains,emblem_right)
+    select SHIELD_EMBLEM
+
+config SHIELD_EMBLEM_DONGLE
+    def_bool $(shields_list_contains,emblem_dongle)
+    select SHIELD_EMBLEM
