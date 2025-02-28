@@ -7,9 +7,10 @@
 
 #include <zephyr/kernel.h>
 #include "util.h"
-#include "key_legend_provider.h"
 #include <math.h>
 #include <string.h>
+
+#include "key_legend_provider.h"
 
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -89,7 +90,8 @@ void draw_battery(lv_obj_t *canvas, const struct status_state *state) {
     }
 }
 
-void draw_keymap(lv_obj_t *canvas, const key_map *key_mapping, size_t key_count) {
+void draw_keymap(lv_obj_t *canvas, const key_map *key_mapping, size_t key_count,
+                 int keyboard_x_offset) {
     lv_draw_label_dsc_t key_label_dsc;
     init_label_dsc(&key_label_dsc, LVGL_BACKGROUND, &lv_font_montserrat_10, LV_TEXT_ALIGN_CENTER);
     lv_draw_label_dsc_t key_label_dsc_small;
@@ -107,7 +109,7 @@ void draw_keymap(lv_obj_t *canvas, const key_map *key_mapping, size_t key_count)
     // For each key in the left half
     for (int i = 0; i < key_count; i++) {
         float x, y;
-        int offset_x = 22;
+        int offset_x = 22 + keyboard_x_offset;
         int offset_y = 15;
         const struct key_position key = key_mapping[i].position;
 

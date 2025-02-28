@@ -265,13 +265,6 @@ static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status
         34, 35, 36              // Thumb cluster
     };
 
-    const int right_keys_mapping[] = {
-        5,  6,  7,  8,  9,      // Top row
-        16, 17, 18, 19, 20, 21, // Middle row
-        28, 29, 30, 31, 32, 33, // Bottom row
-        37, 38, 39              // Thumb cluster
-    };
-
     const size_t key_mapping_size = sizeof(left_keys_mapping) / sizeof(left_keys_mapping[0]);
 
     key_map *keys = (key_map *)malloc(key_mapping_size * sizeof(key_map));
@@ -282,11 +275,8 @@ static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status
 
     get_keyboard_state(keys, state->layer_index, left_keys_mapping, key_mapping_size);
 
-    // draw_keyboard_layout(canvas, state, key_mapping, keymapping_size);
-    // draw_test(canvas, keymapping_size);
-    // any drawing to the canvas in this function breaks the display.
-    // draw_keymap(canvas, keys, keymapping_size);
-    draw_keymap(canvas, keys, key_mapping_size);
+    // Draws the keyboard with keys displayed for the current layer
+    draw_keymap(canvas, keys, key_mapping_size, 0);
 
     // Rotate canvas
     rotate_canvas(canvas, cbuf);
@@ -416,9 +406,9 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
-    lv_obj_t *middle = lv_canvas_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_RIGHT_MID, 0, -50);
-    lv_canvas_set_buffer(middle, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+    lv_obj_t *bottom = lv_canvas_create(widget->obj);
+    lv_obj_align(bottom, LV_ALIGN_RIGHT_MID, 0, -50);
+    lv_canvas_set_buffer(bottom, widget->cbuf2, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
